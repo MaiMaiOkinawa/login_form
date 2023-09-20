@@ -1,0 +1,11 @@
+.hero-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .claim {
+    font-size: var(--size-03);
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,130 @@
+header {
+  background: var(--clr-accent-yellow);
+  width: 100vw;
+  border-bottom: 0.125rem solid var(--clr-basic-800);
+  position: fixed;
+  z-index: 1000;
+}
+
+nav {
+  max-width: min(97.125em - var(--size-02));
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: start;
+  margin-inline: auto;
+  padding: 0.7rem 2rem;
+}
+
+nav .logo-container {
+  position: relative;
+}
+
+nav .logo-container::after {
+  position: absolute;
+  content: "mes.";
+  color: var(--yellow);
+  bottom: 18%;
+  right: -35%;
+  font-size: 0.9rem;
+}
+
+nav img {
+  width: 4.375rem;
+}
+
+nav .menu {
+  display: none;
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 5rem;
+  padding: 2rem 2rem;
+  border-left: 0.125rem solid var(--clr-basic-800);
+}
+
+nav .menu i {
+  font-size: 2rem;
+  color: var(--yellow);
+}
+
+nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 0rem;
+}
+
+nav ul li {
+  color: var(--clr-basic-800);
+  line-height: 1.5rem;
+  height: 100%;
+  margin-inline: var(--size-mid);
+}
+
+nav ul li a {
+  padding: 0.5rem 1.2rem;
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: var(--yellow);
+  box-shadow: 5px 5px;
+  transition: all 0.1s ease-in;
+}
+
+nav ul a:hover {
+  background-color: var(--pink);
+  transition: 0.4s ease;
+}
+
+nav ul a:active {
+  background: var(--purple);
+}
+
+nav ul #contactBtn {
+  background: var(--clr-primary-400);
+}
+
+@media screen and (max-width: 860px) {
+  nav {
+    flex-direction: column;
+    align-items: start;
+    background-color: var(--pink);
+  }
+
+  nav .menu {
+    display: flex;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-inline: auto;
+    width: 100%;
+    margin-top: 1.3rem;
+    margin-bottom: var(--size-01);
+  }
+
+  nav ul.open {
+    display: flex;
+    transform: translateY(0); /* Show the menu when it's open */
+  }
+
+  nav ul li {
+    width: 40%;
+    text-align: center;
+    margin-block: var(--size-01);
+  }
+
+  nav ul li a {
+    border-right: none;
+    padding-inline: var(--size-0250);
+    padding-block: var(--size-01);
+    display: block;
+  }
+}

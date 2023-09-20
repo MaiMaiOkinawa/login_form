@@ -1,0 +1,11 @@
+.speak {
+  background-color: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-wrap: wrap;
+  gap: 5rem 3rem;
+
+  padding-block: 6.25rem;
+}
