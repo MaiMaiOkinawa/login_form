@@ -4,30 +4,36 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const app = express();
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 const db = mysql.createConnection({
   host: 'Localhost',
   user: 'root',
   password: '',
-  database: 'mes',
+  database: 'signup',
 });
 
-app.post('/login', (req, res) => {
-  const sql = 'SELECT * FROM login WHERE email = ? AND password = ?';
-  //   const values = [req.body.email, req.body.password];
-  db.query(sql, [req.body.email, req.body.password], (err, data) => {
-    if (err) return res.json('Error');
-    if (data.lengh > 0) {
-      return res.json('Login Successfully');
-    } else {
-      return res.json('No Record');
+db.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+  } else {
+    console.log('Connected to MySQL!');
+  }
+});
+
+app.post('/signup', (req, res) => {
+  const sql =
+    'INSERT INTO login (`name`, `email`, `password`) VALUES (?, ?, ?)';
+  const values = [req.body.name, req.body.email, req.body.password];
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      return res.json('Error');
     }
+    return res.json(data);
   });
 });
 
-app.listen(8081, () => {
+app.listen(8889, () => {
   console.log('Listening...');
 });
