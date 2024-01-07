@@ -21,7 +21,7 @@ function Signup() {
     setTimeout(() => {
       if (Object.values(errors).every((error) => error === '')) {
         axios
-          .post('http://localhost:8889/signup', ...)
+          .post('http://localhost:8081/signup', values)
           .then((res) => {
             navigate('/');
           })

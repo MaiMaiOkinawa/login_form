@@ -1,21 +1,66 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Validation from './LoginValidation';
+import axios from 'axios';
 
 function Login() {
   const [values, setValues] = useState({
     email: '',
     password: '',
   });
-  const [errors, setErrors] = useState({});
 
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const handleInput = (e) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setErrors(Validation(values));
+  //   if (errors.email === '' && errors.password === '') {
+  //     axios
+  //       .post('http://localhost:8081/login', {
+  //         email: values.email,
+  //         password: values.password,
+  //       })
+  //       .then((res) => {
+  //         console.log('Server Response:', res.data);
+  //         // Assuming you have a user with matching credentials
+  //         if (res.data.length > 0) {
+  //           navigate('/home');
+  //         } else {
+  //           alert('No record existed');
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors(Validation(values));
+
+    if (errors.email === '' && errors.password === '') {
+      try {
+        const response = await axios.post('http://localhost:8081/login', {
+          email: values.email,
+          password: values.password,
+        });
+
+        console.log('Server Response:', response.data);
+
+        if (response.data === 'Success') {
+          navigate('/home');
+        } else if (response.data === 'Fail') {
+          alert("Password didn't match");
+        } else {
+          alert('No record existed');
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+      }
+    }
   };
 
   return (
